@@ -1,0 +1,46 @@
+version: '3.5'
+networks:
+  my-network:
+    driver: bridge
+services:
+  db:
+    image: postgres:14
+    container_name: pg
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+      - POSTGRES_HOST=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./user-auth/docker/db:/docker-entrypoint-initdb.d
+    networks:
+      - my-network
+
+  nodejs:
+    build:
+      context: ./user-auth
+    container_name: node
+    environment:
+      - DB_URL=postgres://postgres:postgres@pg:5432/test_db
+      - email=ubademy.14@gmail.com
+      - pswd=Brancahdp123
+    entrypoint: 'sh -c "sleep 10 && npm start"'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - my-network
+
+  gateway:
+    build:
+      context: ./
+    container_name: gateway
+    environment:
+      USERS_HOST: "http://localhost:8080/"
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
