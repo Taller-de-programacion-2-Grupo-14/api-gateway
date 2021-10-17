@@ -1,8 +1,9 @@
 #Run your file
 buildImage:
-	docker build . -t "${USER}"/node-web-app
+	docker build . -t "${USER}"/gateway
 runImage:
-	docker run -p 8080:8080 -d "${USER}"/node-web-app
+	docker run -p 5000:5000 -d "${USER}"/gateway
+
 buildDC:
 	docker-compose build --no-cache
 runDC:
