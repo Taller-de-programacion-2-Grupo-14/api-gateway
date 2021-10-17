@@ -1,7 +1,7 @@
 from werkzeug.routing import BaseConverter
 from flask import Flask
 from flask_restful import Api
-from Resource import Gateway
+from src.Resource import Gateway
 
 app = Flask(__name__)
 
@@ -15,6 +15,3 @@ class RegexConverter(BaseConverter):
 app.url_map.converters['regex'] = RegexConverter
 api = Api(app)
 api.add_resource(Gateway, '/<regex(".*"):url>')
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8080)
