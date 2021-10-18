@@ -6,6 +6,8 @@ from src.apps.Users import Users
 def getExtraData():
     body = request.json
     headers = dict(request.headers)
+    if 'Host' in headers:
+        headers.pop('Host')  # Invalid header
     queryParams = request.query_string
     return body, headers, queryParams
 
