@@ -15,7 +15,10 @@ class Users:
         self.host = os.getenv("USERS_HOST")
 
     def get(self, url, body, headers, queryParam):
-        response = requests.get(f"{self.host}{url}{getQueryParams(queryParam)}", json=body, headers=headers)
+        url = f"{self.host}{url}{getQueryParams(queryParam)}"
+        print(f"url is {url}")
+        response = requests.get(url, json=body, headers=headers)
+        print(f"response is: {response} and json {response.json()}")
         return make_response(response.json(), response.status_code)
 
     def post(self, url, body, headers, queryParam):
