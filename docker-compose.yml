@@ -28,7 +28,7 @@ services:
       - pswd=Brancahdp123
     entrypoint: 'sh -c "sleep 10 && npm start"'
     ports:
-      - "8080:8080"
+      - "80:8080"
     depends_on:
       - db
     networks:
@@ -39,7 +39,8 @@ services:
       context: ./
     container_name: gateway
     environment:
-      USERS_HOST: "http://localhost:8080/"
+      USERS_HOST: "http://localhost:80/"
+      COURSES_HOST: "http://localhost:80/"
     ports:
       - "5000:5000"
     networks:
