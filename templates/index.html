@@ -4,9 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Swagger UI</title>
-    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
-    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3//swagger-ui.css" />
     <style>
       html
       {
@@ -33,16 +31,15 @@
   <body>
     <div id="swagger-ui"></div>
 
-    <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
-    <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+    <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
     <script>
       window.onload = function() {
-        const local = true;
-
+        let local = true;
         // Build a system
         const ui = SwaggerUIBundle({
           urls: [
-            { url: local ? "http://localhost:80/" : "https://ubademy-14.herokuapp.com/doc", name: "Users" }
+            { url: local ? "http://localhost:8080/doc-yml" : "https://ubademy-14.herokuapp.com/doc-yml", name: "Users" }
           ],
           "urls.primaryName": "Ubademy",
           dom_id: '#swagger-ui',
@@ -59,6 +56,6 @@
 
         window.ui = ui
       }  ;
-  </script>
+    </script>
   </body>
 </html>
