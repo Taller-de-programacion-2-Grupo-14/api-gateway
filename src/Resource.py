@@ -1,6 +1,7 @@
 from flask import request, make_response, render_template
 from flask_restful import Resource
 from src.apps.Users import Users
+from src.apps.Courses import Courses
 
 
 def getExtraData():
@@ -13,7 +14,8 @@ def getExtraData():
 
 
 CLASS_MAP = {
-    "users": Users()
+    "users": Users(),
+    "courses": Courses()
 }
 
 

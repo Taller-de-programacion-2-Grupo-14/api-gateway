@@ -34,13 +34,27 @@ services:
     networks:
       - my-network
 
+  python3:
+    build:
+      context: ./cursos
+    container_name: python
+    environment:
+      - DB_URL=postgres://postgres:postgres@pg:5432/test_db
+    entrypoint: 'sh -c "sleep 10 && hypercorn main:app --reload -b 0.0.0.0:8080"'
+    ports:
+      - "81:8080"
+    depends_on:
+      - db
+    networks:
+      - my-network
+
   gateway:
     build:
       context: ./
     container_name: gateway
     environment:
       USERS_HOST: "http://localhost:80/"
-      COURSES_HOST: "http://localhost:80/"
+      COURSES_HOST: "http://localhost:81/"
     ports:
       - "5000:5000"
     networks:
