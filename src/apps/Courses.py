@@ -55,8 +55,9 @@ class Courses:
 
     def getResponseJson(self, response):
         if response.status_code == 503 or not response.text:
-            return {"message": "users service is currently unavailable, please try later",
-                    "status": http.client.SERVICE_UNAVAILABLE}
+            return {"message": "courses service is currently unavailable, please try later",
+                    "status": http.client.SERVICE_UNAVAILABLE,
+                    "error": f"{response.text}"}
         return response.json()
 
     def post(self, url, body, headers, queryParam):
