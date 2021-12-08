@@ -46,6 +46,9 @@ def _getToken(headers: dict):
 def processHeader(headers, body: dict) -> (dict, bool):
     if 'Host' in headers:
         headers.pop('Host')  # Invalid header
+    if not body and 'Content-Type' in headers:
+        headers = headers.copy()
+        headers.pop('Content-Type')
     token = _getToken(headers)
     if not token and not (body and "user_id" in body):  # Check to not allow to bypass the token
         return body, False
