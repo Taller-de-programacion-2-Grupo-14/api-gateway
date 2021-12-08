@@ -46,7 +46,7 @@ def _getToken(headers: dict):
 def processHeader(headers, body: dict) -> (dict, bool):
     if 'Host' in headers:
         headers.pop('Host')  # Invalid header
-    if not body and 'Content-Type' in headers:
+    if 'Content-Type' in headers:
         headers = headers.copy()
         headers.pop('Content-Type')
     token = _getToken(headers)
