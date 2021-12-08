@@ -71,9 +71,9 @@ def processHeader(headers, body: dict) -> (dict, bool):
 @app.before_request
 def preRequest():
     headers = dict(request.headers)
-    body, error = processHeader(headers, {})
-    if error:
-        return body
+    #body, error = processHeader(headers, {})
+    #if error:
+    #    return body
 
 
 app.url_map.converters['regex'] = RegexConverter
