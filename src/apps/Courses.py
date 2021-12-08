@@ -31,7 +31,6 @@ def processHeader(headers, body: dict) -> (dict, bool):
     newBody = body.copy() if body else {}
     try:
         processToken = jwt.decode(token, key=os.getenv("HASH_SECRET"), algorithms=[os.getenv("HASH_ALGORITHM"), ])
-        newBody.update(processToken)
         newBody["user_id"] = processToken.get("id", "")
         newBody["email"] = processToken.get("email")
     except jwt.ExpiredSignatureError:
