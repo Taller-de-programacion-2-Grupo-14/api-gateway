@@ -63,7 +63,9 @@ class Courses:
         body, shouldFinish = processHeader(headers, body)
         if shouldFinish:
             return make_response(body, body['status'])
-        response = requests.post(f"{self.host}{url}{getQueryParams(queryParam)}", json=body, headers=headers)
+        url = f"{self.host}{url}{getQueryParams(queryParam)}"
+        print(f"will do request with url: {url} and body {body}")
+        response = requests.post(url, json=body, headers=headers)
         return make_response(self.getResponseJson(response), response.status_code)
 
     def delete(self, url, body, headers, queryParam):
