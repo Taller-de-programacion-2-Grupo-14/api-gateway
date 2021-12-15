@@ -40,7 +40,8 @@
         const ui = SwaggerUIBundle({
           urls: [
             { url: local ? "http://localhost:80/doc-yml" : "https://ubademy-14.herokuapp.com/doc-yml", name: "Users" },
-            { url: local ? "http://localhost:81/doc-yml" : "https://ubademy-14-cursos.herokuapp.com/doc-yml", name: "Courses" }
+            { url: local ? "http://localhost:81/doc-yml" : "https://ubademy-14-cursos.herokuapp.com/doc-yml", name: "Courses" },
+            { url: local ? "http://localhost:81/doc-yml" : "https://ubademy-14-exams.herokuapp.com/doc-yml", name: "Exams" }
           ],
           "urls.primaryName": "Ubademy",
           dom_id: '#swagger-ui',
