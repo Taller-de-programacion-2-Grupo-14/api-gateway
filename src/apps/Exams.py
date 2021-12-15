@@ -81,3 +81,10 @@ class Exams:
             return make_response(body, body['status'])
         response = requests.patch(f"{self.host}{url}{getQueryParams(queryParam)}", json=body, headers=headers)
         return make_response(self.getResponseJson(response), response.status_code)
+
+    def put(self, url, body, headers, queryParam):
+        body, shouldFinish = processHeader(headers, body)
+        if shouldFinish:
+            return make_response(body, body['status'])
+        response = requests.put(f"{self.host}{url}{getQueryParams(queryParam)}", json=body, headers=headers)
+        return make_response(self.getResponseJson(response), response.status_code)

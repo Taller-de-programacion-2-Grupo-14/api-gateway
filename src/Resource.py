@@ -56,3 +56,9 @@ class Gateway(Resource):
         if not resource:
             return make_response({"message": "not found"}, 404)
         return resource.delete(url, *getExtraData())
+
+    def put(self, url):
+        resource = getCorrectEndpoint(url)
+        if not resource or resource != exam:
+            return make_response({"message": "not found"}, 404)
+        return resource.put(url, *getExtraData())
