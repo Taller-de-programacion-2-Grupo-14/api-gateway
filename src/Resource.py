@@ -15,10 +15,15 @@ def getExtraData():
     return body, headers, queryParams
 
 
+exam = Exams()
 CLASS_MAP = {
     "users": Users(),
     "courses": Courses(),
-    "exams": Exams()
+    "exams": exam,
+    "exam": exam,
+    "resolution": exam,
+    "resolutions": exam
+
 }
 
 
