@@ -16,9 +16,11 @@ def getExtraData():
 
 
 exam = Exams()
+courses = Courses()
 CLASS_MAP = {
     "users": Users(),
-    "courses": Courses(),
+    "courses": courses,
+    "notification": courses,
     "exams": exam,
     "exam": exam,
     "resolution": exam,
