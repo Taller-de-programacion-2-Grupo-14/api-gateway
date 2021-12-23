@@ -14,7 +14,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./user-auth/docker/db:/docker-entrypoint-initdb.d
+      - ./docker/db:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -36,19 +36,27 @@ services:
     networks:
       - my-network
 
-  python3:
+  python3c:
     build:
       context: ./cursos
-    container_name: python
+    container_name: pythonCursos
     environment:
       - DB_URL=postgres://postgres:postgres@pg:5432/test_db
-      - HASH_SECRET=some
-      - HASH_ALGORITHM=HS256
-    entrypoint: 'sh -c "sleep 10 && hypercorn main:app --reload -b 0.0.0.0:8080"'
+    entrypoint: 'sh -c "sleep 10 && uvicorn main:app --reload --host 0.0.0.0 --port 8081"'
     ports:
-      - "81:8080"
+      - "81:8081"
     depends_on:
       - db
+    networks:
+      - my-network
+
+  python3e:
+    build:
+      context: ./ubademy-exams
+    container_name: pythonExams
+    entrypoint: 'uvicorn main:app --reload --host 0.0.0.0 --port 8082'
+    ports:
+      - "82:8082"
     networks:
       - my-network
 
@@ -57,8 +65,11 @@ services:
       context: ./
     container_name: gateway
     environment:
-      USERS_HOST: "http://localhost:80/"
-      COURSES_HOST: "http://localhost:81/"
+      - USERS_HOST=http://node:8080/
+      - COURSES_HOST=http://pythonCursos:8081/
+      - EXAMS_HOST=http://pythonExams:8082/
+      - HASH_SECRET=some
+      - HASH_ALGORITHM=HS256
     ports:
       - "5000:5000"
     networks:

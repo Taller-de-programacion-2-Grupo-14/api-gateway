@@ -4,3 +4,6 @@
 [submodule "cursos"]
 	path = cursos
 	url = https://github.com/Taller-de-programacion-2-Grupo-14/cursos.git
+[submodule "ubademy-exams"]
+	path = ubademy-exams
+	url = https://github.com/Taller-de-programacion-2-Grupo-14/ubademy-exams
