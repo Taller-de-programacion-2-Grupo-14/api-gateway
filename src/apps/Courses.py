@@ -41,8 +41,9 @@ def processHeader(headers, body: dict) -> (dict, bool):
 
 
 class Courses:
-    def __init__(self):
+    def __init__(self, checkToken=True):
         self.host = os.getenv("COURSES_HOST")
+        self.checkToken = checkToken
 
     def get(self, url, body, headers, queryParam):
         url = f"{self.host}{url}{getQueryParams(queryParam)}"
@@ -60,7 +61,9 @@ class Courses:
         return response.json()
 
     def post(self, url, body, headers, queryParam):
-        body, shouldFinish = processHeader(headers, body)
+        shouldFinish = False
+        if self.checkToken:
+            body, shouldFinish = processHeader(headers, body)
         if shouldFinish:
             return make_response(body, body['status'])
         url = f"{self.host}{url}{getQueryParams(queryParam)}"
